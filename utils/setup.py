@@ -10,7 +10,7 @@ def run_command(command, cwd=None):
 
 def install_dependencies_and_setup():
     # 先に sd-scripts をクローン
-    run_command("git clone -b dev https://github.com/kohya-ss/sd-scripts.git")
+    run_command("git clone https://github.com/kohya-ss/sd-scripts.git")
 
     # その他の依存関係のインストールコマンド
     commands = [
