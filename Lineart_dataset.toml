@@ -10,4 +10,4 @@ max_bucket_reso = 1280
 
 [[datasets.subsets]]
 image_dir = "/content/CoppyLora_Train/lineart"
-num_repeats = 1
+num_repeats = 4000
