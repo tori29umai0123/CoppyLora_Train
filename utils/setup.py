@@ -1,5 +1,10 @@
-import subprocess
 import os
+import sys
+import subprocess
+
+def is_colab_environment():
+    """Google Colab環境かどうかをチェックする関数"""
+    return 'google.colab' in sys.modules
 
 def run_command(command, cwd=None):
     try:
@@ -9,8 +14,15 @@ def run_command(command, cwd=None):
         print(f"Error executing command: {e.stderr}")
 
 def install_dependencies_and_setup():
-    # 先に sd-scripts をクローン
-    run_command("git clone -b dev https://github.com/kohya-ss/sd-scripts.git")
+    if is_colab_environment():
+        base_dir = '/content/CoppyLora_Train'
+        print("Running in Google Colab, changed directory to /content/CoppyLora_Train")
+
+    # sd-scripts ディレクトリのパスを指定
+    sd_scripts_dir = os.path.join(base_dir, 'sd-scripts') if is_colab_environment() else 'sd-scripts'
+
+    # sd-scripts をクローン
+    run_command(f"git clone -b dev https://github.com/kohya-ss/sd-scripts.git {sd_scripts_dir}")
 
     # その他の依存関係のインストールコマンド
     commands = [
@@ -24,4 +36,7 @@ def install_dependencies_and_setup():
 
     # sd-scripts ディレクトリでコマンドを実行
     for cmd in commands:
-        run_command(cmd, cwd="sd-scripts")
+        run_command(cmd, cwd=sd_scripts_dir)
+
+# スクリプトの実行
+install_dependencies_and_setup()
