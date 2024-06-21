@@ -96,7 +96,8 @@ def main():
             outputs=output_file
         )
 
-    demo.launch(share=True, server_settings={"timeout": 3600})
+    demo.queue()
+    demo.launch(share=True)
 
 if __name__ == "__main__":
     main()
