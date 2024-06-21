@@ -1,0 +1,13 @@
+[general]
+shuffle_caption = true
+enable_bucket = true
+caption_extension = ".txt"
+
+[[datasets]]
+resolution = 1024
+min_bucket_reso = 768
+max_bucket_reso = 1280
+
+[[datasets.subsets]]
+image_dir = "/content/CoppyLora_Train/lineart"
+num_repeats = 1
