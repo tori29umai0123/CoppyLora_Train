@@ -6,6 +6,7 @@ from PIL import Image
 import os
 
 path = os.getcwd()
+print(path)
 SDXL_dir = os.path.join(path, "SDXL")
 SDXL_model = os.path.join(SDXL_dir, "animagine-xl-3.1.safetensors")
 lora_dir = os.path.join(path, "lora")
@@ -24,7 +25,12 @@ def replace_text_in_file_if_needed(file_path, search_text, replace_text):
     with open(file_path, 'r', encoding='utf-8') as file:
         data = file.read()
 
-    # テキストが既に置換されているか確認
+    # すでに置換されている場合は何もしない
+    if replace_text in data:
+        print(f"No need to replace text in {file_path}, already replaced.")
+        return
+
+    # テキストが存在していれば置換する
     if search_text in data:
         # テキストを置換する
         updated_data = data.replace(search_text, replace_text)
@@ -34,7 +40,7 @@ def replace_text_in_file_if_needed(file_path, search_text, replace_text):
             file.write(updated_data)
         print(f"Replaced text in {file_path}")
     else:
-        print(f"No need to replace text in {file_path}")
+        print(f"{search_text} not found in {file_path}. No replacement necessary.")
 
 replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
 replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
