@@ -11,10 +11,10 @@ import torch
 import subprocess
 import os
 from PIL import Image
-from utils.setup import install_dependencies_and_setup
+# from utils.setup import install_dependencies_and_setup
 from utils.dl_utils import dl_SDXL_model, dl_lora_model, dl_base_image
 
-install_dependencies_and_setup()
+# install_dependencies_and_setup()
 
 path = os.getcwd()
 SDXL_dir = os.path.join(path, "SDXL")
