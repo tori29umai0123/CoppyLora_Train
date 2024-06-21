@@ -43,7 +43,6 @@ def replace_text_in_file_if_needed(file_path, search_text, replace_text):
         print(f"{search_text} not found in {file_path}. No replacement necessary.")
 
 replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
-replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
 
 def train(input_image_path, lora_name, mode_inputs):
     input_image = Image.open(input_image_path)
@@ -95,7 +94,6 @@ def main():
             inputs=[input_image_path, lora_name, mode_inputs],
             outputs=output_file
         )
-
     demo.queue()
     demo.launch(share=True)
 
