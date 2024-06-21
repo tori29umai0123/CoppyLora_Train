@@ -22,21 +22,26 @@ path_to_train_util = os.path.join(path,'sd-scripts/library/train_util.py')
 path_to_sdxl_train_network = os.path.join(path,'sd-scripts/sdxl_train_network.py')
 SDXL_config = os.path.join(path, "copi-ki_SDXL.toml")
 
-def replace_text_in_file(file_path, search_text, replace_text):
+def replace_text_in_file_if_needed(file_path, search_text, replace_text):
     # ファイルを読み込む
     with open(file_path, 'r', encoding='utf-8') as file:
         data = file.read()
-    
-    # テキストを置換する
-    data = data.replace(search_text, replace_text)
-    
-    # ファイルに書き込む
-    with open(file_path, 'w', encoding='utf-8') as file:
-        file.write(data)
 
-replace_text_in_file(path_to_train_util, 'config_file', 'train_config_file')
-replace_text_in_file(path_to_sdxl_train_network, 'config_file', 'train_config_file')
+    # テキストが既に置換されているか確認
+    if search_text in data:
+        # テキストを置換する
+        updated_data = data.replace(search_text, replace_text)
+        
+        # ファイルに書き込む
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(updated_data)
+        print(f"Replaced text in {file_path}")
+    else:
+        print(f"No need to replace text in {file_path}")
 
+# 使用例
+replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
+replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
 
 def train(input_image_path, lora_name, mode_inputs):
     input_image = Image.open(input_image_path)
@@ -84,6 +89,19 @@ def main():
                 output_file = gr.File(label="Download Output File")
 
         train_button.click(
+
+# 使用例
+replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
+replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
+
+def train(input_image_path, lora_name, mode_inputs):
+    input_image = Image.open(input_image_path)
+    if mode_inputs == "Lineart":
+        lineart_dir = os.path.join(path, "lineart/4000")
+        train_dir = os.path.join(path, "lineart")
+
+  2 分 17 秒
+完了時間: 17:34
             fn=train,
             inputs=[input_image_path, lora_name, mode_inputs],
             outputs=output_file
