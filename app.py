@@ -36,7 +36,6 @@ def replace_text_in_file_if_needed(file_path, search_text, replace_text):
     else:
         print(f"No need to replace text in {file_path}")
 
-# 使用例
 replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
 replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
 
@@ -86,19 +85,6 @@ def main():
                 output_file = gr.File(label="Download Output File")
 
         train_button.click(
-
-# 使用例
-replace_text_in_file_if_needed(path_to_train_util, 'config_file', 'train_config_file')
-replace_text_in_file_if_needed(path_to_sdxl_train_network, 'config_file', 'train_config_file')
-
-def train(input_image_path, lora_name, mode_inputs):
-    input_image = Image.open(input_image_path)
-    if mode_inputs == "Lineart":
-        lineart_dir = os.path.join(path, "lineart/4000")
-        train_dir = os.path.join(path, "lineart")
-
-  2 分 17 秒
-完了時間: 17:34
             fn=train,
             inputs=[input_image_path, lora_name, mode_inputs],
             outputs=output_file
