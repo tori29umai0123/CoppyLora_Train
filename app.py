@@ -7,13 +7,10 @@ import os
 
 path = os.getcwd()
 SDXL_dir = os.path.join(path, "SDXL")
-os.makedirs(SDXL_dir, exist_ok=True)
 SDXL_model = os.path.join(SDXL_dir, "animagine-xl-3.1.safetensors")
 lora_dir = os.path.join(path, "lora")
-os.makedirs(lora_dir, exist_ok=True)
 base_lora = os.path.join(lora_dir, "copi-ki-base-c.safetensors")
 base_image_dir = os.path.join(path, "base_image")
-os.makedirs(base_image_dir, exist_ok=True)
 base_image_path = os.path.join(base_image_dir, "base_c_1024.png")
 output_dir = os.path.join(path, "output")
 os.makedirs(output_dir, exist_ok=True)
