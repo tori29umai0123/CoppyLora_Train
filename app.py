@@ -6,19 +6,18 @@ from PIL import Image
 import os
 
 path = os.getcwd()
-print(path)
 SDXL_dir = os.path.join(path, "SDXL")
 SDXL_model = os.path.join(SDXL_dir, "animagine-xl-3.1.safetensors")
 lora_dir = os.path.join(path, "lora")
 base_lora = os.path.join(lora_dir, "copi-ki-base-c.safetensors")
 base_image_dir = os.path.join(path, "base_image")
 base_image_path = os.path.join(base_image_dir, "base_c_1024.png")
-output_dir = os.path.join(path, "output")
-os.makedirs(output_dir, exist_ok=True)
 accelerate_config = os.path.join(path, "accelerate_config.yaml")
 path_to_train_util = os.path.join(path,'sd-scripts/library/train_util.py')
 path_to_sdxl_train_network = os.path.join(path,'sd-scripts/sdxl_train_network.py')
 SDXL_config = os.path.join(path, "copi-ki_SDXL.toml")
+output_dir = os.path.join(path, "output")
+os.makedirs(output_dir, exist_ok=True)
 
 def replace_text_in_file_if_needed(file_path, search_text, replace_text):
     # ファイルを読み込む
