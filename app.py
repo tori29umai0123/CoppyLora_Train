@@ -5,66 +5,15 @@ import os
 from PIL import Image
 import os
 
-import requests
-from tqdm import tqdm
-
-def dl_SDXL_model(model_dir):
-    file_name = 'animagine-xl-3.1.safetensors'
-    file_path = os.path.join(model_dir, file_name)
-    if not os.path.exists(file_path):
-        url = "https://huggingface.co/cagliostrolab/animagine-xl-3.1/resolve/main/animagine-xl-3.1.safetensors"
-        response = requests.get(url, allow_redirects=True)
-        if response.status_code == 200:
-            with open(file_path, 'wb') as f:
-                f.write(response.content)
-            print(f'Downloaded {file_name}')
-        else:
-            print(f'Failed to download {file_name}')
-    else:
-        print(f'{file_name} already exists.')
-
-def dl_lora_model(model_dir):
-    file_name = 'copi-ki-base-c.safetensors'
-    file_path = os.path.join(model_dir, file_name)
-    if not os.path.exists(file_path):
-        url = "https://huggingface.co/tori29umai/mylora/resolve/main/copi-ki-base-c.safetensors"
-        response = requests.get(url, allow_redirects=True)
-        if response.status_code == 200:
-            with open(file_path, 'wb') as f:
-                f.write(response.content)
-            print(f'Downloaded {file_name}')
-        else:
-            print(f'Failed to download {file_name}')
-    else:
-        print(f'{file_name} already exists.')
-
-def dl_base_image(image_dir):
-    file_name = 'base_c_1024.png'
-    file_path = os.path.join(image_dir, file_name)
-    if not os.path.exists(file_path):
-        url = "https://huggingface.co/tori29umai/mylora/resolve/main/base_c_1024.png?download=true"
-        response = requests.get(url, allow_redirects=True)
-        if response.status_code == 200:
-            with open(file_path, 'wb') as f:
-                f.write(response.content)
-            print(f'Downloaded {file_name}')
-        else:
-            print(f'Failed to download {file_name}')
-    else:
-        print(f'{file_name} already exists.')
-
 path = os.getcwd()
 SDXL_dir = os.path.join(path, "SDXL")
 os.makedirs(SDXL_dir, exist_ok=True)
-dl_SDXL_model(SDXL_dir)
 SDXL_model = os.path.join(SDXL_dir, "animagine-xl-3.1.safetensors")
 lora_dir = os.path.join(path, "lora")
 os.makedirs(lora_dir, exist_ok=True)
-dl_lora_model(lora_dir)
 base_lora = os.path.join(lora_dir, "copi-ki-base-c.safetensors")
 base_image_dir = os.path.join(path, "base_image")
 os.makedirs(base_image_dir, exist_ok=True)
-dl_base_image(base_image_dir)
 base_image_path = os.path.join(base_image_dir, "base_c_1024.png")
 output_dir = os.path.join(path, "output")
 os.makedirs(output_dir, exist_ok=True)
